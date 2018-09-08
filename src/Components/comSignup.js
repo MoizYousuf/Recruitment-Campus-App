@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
 
-export default class ComSignUp extends Component {
+export default class SignUp extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      username: "",
+      name: "",
       password: ""
     };
   }
@@ -32,14 +32,14 @@ export default class ComSignUp extends Component {
         });
         firebase
           .database()
-          .ref(`users/${success.user.uid}`)
+          .ref(`Companies/${success.user.uid}`)
           .set(this.state)
           .then(res => {
             let user = firebase.auth().currentUser;
 
             user
               .updateProfile({
-                displayName: this.state.username
+                displayName: this.state.name
               })
               .then(() => {
                 this.props.history.push("/");
@@ -59,19 +59,19 @@ export default class ComSignUp extends Component {
       <div style={styles.body}>
         <div className="card mb-3 text-center" style={styles.card}>
           <div className="card-header bg-transparent">
-            <h1>Signup</h1>
+            <h1>Company Signup</h1>
           </div>
           <div className="card-body text-success">
             <div className="card-title">
               <div className="input-group input-group-lg">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="inputGroup-sizing-lg">
-                    Username
+                    Name
                   </span>
                 </div>
                 <input
                   type="text"
-                  onChange={e => this.setState({ username: e.target.value })}
+                  onChange={e => this.setState({ name: e.target.value })}
                   className="form-control"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-lg"
@@ -118,10 +118,10 @@ export default class ComSignUp extends Component {
               </button>
             </p>
             <p style={styles.bg} className="card-text text-danger">
-              Company Signup &nbsp;
+              Students Signup &nbsp;
               <button
                 className="btn btn-outline-primary"
-                onClick={() => this.props.history.push("/comsignup")}
+                onClick={() => this.props.history.push("/signup")}
               >
                 Click here
               </button>
