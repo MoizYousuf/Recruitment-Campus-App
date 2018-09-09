@@ -7,7 +7,8 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       name: "",
-      password: ""
+      password: "",
+      company: "Company"
     };
   }
 
@@ -32,7 +33,7 @@ export default class SignUp extends Component {
         });
         firebase
           .database()
-          .ref(`Companies/${success.user.uid}`)
+          .ref(`users/${success.user.uid}`)
           .set(this.state)
           .then(res => {
             let user = firebase.auth().currentUser;

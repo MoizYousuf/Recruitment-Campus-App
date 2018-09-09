@@ -7,7 +7,8 @@ export default class ComSignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      student:"student",
     };
   }
 
@@ -59,7 +60,7 @@ export default class ComSignUp extends Component {
       <div style={styles.body}>
         <div className="card mb-3 text-center" style={styles.card}>
           <div className="card-header bg-transparent">
-            <h1>Signup</h1>
+            <h1>Student Signup</h1>
           </div>
           <div className="card-body text-success">
             <div className="card-title">

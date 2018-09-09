@@ -1,13 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import UpdateInformation from "./updateinformation";
-import TotalCompanies from "./totalCompanies";
-import TotalJobs from "./jobs";
+import AddJobs from "./addJobs";
+import TotalUsers from "./totalUsers";
+import MyJobs from "./myJobs";
 
 function TabContainer(props) {
   return (
@@ -28,7 +28,7 @@ const styles = theme => ({
   }
 });
 
-export default class TabsWrappedLabel extends React.Component {
+export default class TabsToChanges extends Component {
   constructor() {
     super();
     this.state = {
@@ -47,24 +47,24 @@ export default class TabsWrappedLabel extends React.Component {
       <div className={styles.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange} centered>
-            <Tab value="one" label="Update Information" />
-            <Tab value="two" label="Jobs" />
-            <Tab value="three" label="Total Company" />
+            <Tab value="one" label="Add Jobs" />
+            <Tab value="two" label="My Jobs " />
+            <Tab value="three" label="Total Users" />
           </Tabs>
         </AppBar>
         {value === "one" && (
           <TabContainer>
-            <UpdateInformation />
+            <AddJobs />
           </TabContainer>
         )}
         {value === "two" && (
           <TabContainer>
-            <TotalJobs />
+            <MyJobs />
           </TabContainer>
         )}
         {value === "three" && (
           <TabContainer>
-            <TotalCompanies />
+            <TotalUsers />
           </TabContainer>
         )}
       </div>

@@ -7,8 +7,22 @@ export default class Login extends Component {
     this.state = {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      totalUsers: {}
     };
+  }
+
+  //  getting totalUsers
+
+  componentDidMount() {
+    firebase
+      .database()
+      .ref("users/")
+      .on("value", snapshot => {
+        this.setState({
+          totalUsers: Object.values(snapshot.val())
+        });
+      });
   }
 
   // Using firebase to login easily
@@ -18,17 +32,22 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        this.props.history.push("/home");
+        this.state.totalUsers.map(value => {
+          if (value.email === this.state.email) {
+            if (value.student) {
+              this.props.history.push("/home");
+            } else {
+              this.props.history.push("/comHome");
+            }
+          }
+        });
       });
   };
 
   render() {
     return (
       <div style={styles.body}>
-        <div
-          className="card  mb-3 text-center"
-          style={styles.card}
-          >
+        <div className="card  mb-3 text-center" style={styles.card}>
           <div className="card-header bg-transparent ">
             <h1>Login</h1>
           </div>
@@ -61,7 +80,7 @@ export default class Login extends Component {
                   className="form-control"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-lg"
-                  />
+                />
               </div>
             </div>
             <p className="card-text text-primary">
@@ -79,7 +98,7 @@ export default class Login extends Component {
               type="button"
               className="btn btn-danger btn-lg btn-block"
               onClick={() => this.login()}
-              >
+            >
               Login
             </button>
           </div>

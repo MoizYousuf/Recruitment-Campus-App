@@ -69,9 +69,15 @@ export default class Appbar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography className="text-center" variant="title" color="inherit">
-              Recruitment Campus
-            </Typography>
+            <div className="w-100 p-3 text-center">
+              <Typography
+                className="text-center"
+                variant="title"
+                color="inherit"
+              >
+                Recruitment Campus
+              </Typography>
+            </div>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer

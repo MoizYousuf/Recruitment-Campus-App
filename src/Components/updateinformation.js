@@ -11,15 +11,19 @@ export default class UpdateInformation extends Component {
     super();
     this.state = {
       skills: "",
-      Experience: "",
-      Education: ""
+      Experience: "1",
+      Education: "matric"
     };
   }
 
   // submit Informations
 
   submitInformation = () => {
-    if ((this.state.skills, this.state.Experience, this.state.Education)) {
+    if (
+      this.state.skills !== "" &&
+      this.state.Experience !== "" &&
+      this.state.Education !== ""
+    ) {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           firebase
@@ -55,13 +59,20 @@ export default class UpdateInformation extends Component {
                 placeholder="Manager"
                 margin="normal"
               />
-              <TextField
-                onChange={e => this.setState({ Experience: e.target.value })}
-                id="with-placeholder"
-                label="Experience"
-                placeholder="1 year"
-                margin="normal"
-              />
+              <FormControl>
+                <InputLabel htmlFor="name-native">Experience</InputLabel>
+                <NativeSelect
+                  value={this.state.name}
+                  onChange={e => this.setState({ Experience: e.target.value })}
+                  input={<Input name="name" id="name-native" />}
+                >
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
+                  <option value="4">4 Year</option>
+                  <option value="5">5 Year</option>
+                </NativeSelect>
+              </FormControl>
               <br />
               <FormControl>
                 <InputLabel htmlFor="name-native">Education</InputLabel>
