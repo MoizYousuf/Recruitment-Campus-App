@@ -105,11 +105,11 @@ export default class UpdateInformation extends Component {
 const styles = {
   body: {
     margin: "0 auto",
-    marginLeft: "38%",
     marginTop: "8%"
   },
   card: {
     background: "rgba(255, 255, 255, 0.6    )",
-    width: "24rem"
+    width: "24rem",
+    margin: " 0 auto"
   }
 };

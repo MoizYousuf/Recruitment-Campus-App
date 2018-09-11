@@ -43,9 +43,19 @@ export default class AddJobs extends Component {
             .then(() => {
               //   console.log("Set Informations");
               alert("Job Add");
+              this.setState({
+                Experience: "",
+                Education: "",
+                companyName: "",
+                position: "",
+                shift: "",
+                salary: "",
+                timingFrom: "",
+                timingTo: ""
+              });
             });
         } else {
-          alert("not push");
+          alert("Bye");
         }
       });
     } else {
@@ -111,8 +121,8 @@ export default class AddJobs extends Component {
                   onChange={e => this.setState({ shift: e.target.value })}
                   input={<Input name="name" id="name-native" />}
                 >
-                  <option value="Morning">Morning</option>
-                  <option value="Evening">Evening</option>
+                  <option value="morning">Morning</option>
+                  <option value="evening">Evening</option>
                 </NativeSelect>
               </FormControl>
               <br />
@@ -173,12 +183,11 @@ export default class AddJobs extends Component {
 }
 const styles = {
   body: {
-    margin: "0 auto",
-    marginLeft: "38%",
-    marginTop: "8%"
+    margin: "0 auto"
   },
   card: {
     background: "rgba(255, 255, 255, 0.6    )",
-    width: "24rem"
+    width: "24rem",
+    margin: "0 auto"
   }
 };

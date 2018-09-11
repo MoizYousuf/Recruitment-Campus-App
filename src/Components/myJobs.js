@@ -38,6 +38,10 @@ export default class MyJobs extends Component {
               console.log(Myjob);
               return Myjob.map((value, index) => {
                 console.log(value);
+                let appliedUsers;
+                if (value.AppliedUser) {
+                  appliedUsers = Object.values(value.AppliedUser);
+                }
                 return (
                   <div
                     key={index}
@@ -65,7 +69,14 @@ export default class MyJobs extends Component {
                         <p>
                           Timing To: <b>{value.timingTo}</b>
                         </p>
-                        <div style={styles.usersApplied} />
+                        <div style={styles.usersApplied}>
+                        <b>AppliedUser</b>
+                          {appliedUsers
+                            ? appliedUsers.map((value, index) => {
+                                return <p key={index}>{value.username}</p>;
+                              })
+                            : console.log("operator false")}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -91,6 +102,8 @@ const styles = {
   },
   usersApplied: {
     height: "10vh",
-    overFlowY: "auto"
+    overFlowY: "auto",
+    background: "rgba(0,0,0, 0.6)",
+    color: "white"
   }
 };

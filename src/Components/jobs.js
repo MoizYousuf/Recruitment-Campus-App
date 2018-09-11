@@ -17,23 +17,37 @@ export default class TotalJobs extends Component {
     const username = this.state.username;
     console.log("function start");
     let informations;
+    let data;
+    let message = "apply";
     const totalUsers = Object.values(this.state.totalUsers);
     totalUsers.map(value => {
       console.log("map start", value);
-
+      const jobs = Object.values(totalUsers[index].myjobs);
+      jobs[i].AppliedUser ? (data = Object.values(jobs[i].AppliedUser)) : "";
+      data
+        ? data.map(value => {
+            if (value.username !== username) {
+              message = "apply";
+            } else {
+              message = "You alread Applied this job";
+            }
+          })
+        : "";
+      // console.log(data.username === username);
+      // console.log();
       if (value.Uid === this.state.Uid) {
-        console.log("Uid match");
+        // console.log("Uid match");
         if (value.informations) {
-          console.log("information found");
+          // console.log("information found");
           informations = value.informations;
           const jobUser = Object.values(totalUsers[index].myjobs);
           const key = Object.keys(totalUsers[index].myjobs);
           if (
-            jobUser[i].experience >= informations.experience &&
+            jobUser[i].experience <= informations.experience &&
             jobUser[i].position === informations.skill &&
             jobUser[i].education === informations.education
           ) {
-            console.log(jobUser);
+            // console.log(jobUser);
             firebase
               .database()
               .ref(
@@ -46,7 +60,7 @@ export default class TotalJobs extends Component {
                 username: username
               })
               .then(() => {
-                alert("apply");
+                alert(message);
               });
           } else {
             console.log("you dont apply this jobs");
@@ -82,9 +96,9 @@ export default class TotalJobs extends Component {
         {Convert.map((value, userIndex) => {
           if (value.myjobs) {
             const Myjob = Object.values(value.myjobs);
-            console.log(Myjob);
+            // console.log(Myjob);
             return Myjob.map((value, index) => {
-              console.log(value);
+              // console.log(value);
               return (
                 <div
                   key={index}
@@ -92,10 +106,12 @@ export default class TotalJobs extends Component {
                   style={styles.card}
                 >
                   <div className="card-body">
-                    <h2 className="card-title">{value.companyName}</h2>
-                    <h4 className="card-subtitle mb-2 text-muted">
-                      {value.position}
-                    </h4>
+                    <div style={styles.header}>
+                      <h2 className="card-title">{value.companyName}</h2>
+                      <h4 className="card-subtitle mb-2 text-muted">
+                        {value.position}
+                      </h4>
+                    </div>
                     <div className="card-text">
                       <p>
                         Experience: <b>{value.experience}</b>
@@ -131,13 +147,23 @@ export default class TotalJobs extends Component {
 }
 const styles = {
   card: {
-    width: "20%",
+    width: "25%",
     textAlign: "center",
     background: "rgba(255,255,255, 0.8)",
-    marginLeft: "2%"
+    marginLeft: "2%",
+    display: "inline-block",
+    marginTop: "1%"
   },
   body: {
-    display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "100%",
+    height: "80vh",
+    textAlign: "center",
+    overFlowY: "auto"
+  },
+  header: {
+    background: "rgba(0,0,0, 0.8)",
+    width: "100%",
+    color: "white"
   }
 };

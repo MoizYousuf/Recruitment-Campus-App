@@ -32,7 +32,7 @@ export default class TabsWrappedLabel extends React.Component {
   constructor() {
     super();
     this.state = {
-      value: "one"
+      value: "two"
     };
   }
 
