@@ -34,11 +34,11 @@ export default class AddJobs extends Component {
       this.state.timingFrom !== "" &&
       this.state.timingTo !== ""
     ) {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
+      // firebase.auth().onAuthStateChanged(user => {
+        // if (user) {
           firebase
             .database()
-            .ref(`users/${user.uid}/myjobs`)
+            .ref(`users/${firebase.auth().currentUser.uid}/myjobs`)
             .push(this.state)
             .then(() => {
               //   console.log("Set Informations");
@@ -54,10 +54,10 @@ export default class AddJobs extends Component {
                 timingTo: ""
               });
             });
-        } else {
-          alert("Bye");
-        }
-      });
+        // } else {
+        //   alert("Bye");
+        // }
+      // });
     } else {
       console.log(this.state);
       alert("please fills all");

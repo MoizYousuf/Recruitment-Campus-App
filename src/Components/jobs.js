@@ -29,7 +29,7 @@ export default class TotalJobs extends Component {
             if (value.username !== username) {
               message = "apply";
             } else {
-              message = "You alread Applied this job";
+              message = "You already Applied this job";
             }
           })
         : "";
